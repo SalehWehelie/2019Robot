@@ -9,6 +9,8 @@ package org.usfirst.frc.team3786.robot;
 
 import org.usfirst.frc.team3786.robot.commands.drive.TankDriveCommand;
 
+import static org.junit.Assert.assertTrue;
+
 import java.awt.Color;
 
 import org.usfirst.frc.team3786.robot.commands.debug.DebugMotorController;
@@ -60,7 +62,7 @@ public class Robot extends TimedRobot {
 		gyro = Gyroscope.getInstance();
 		LED.setup();
 		LED.setColor(idleColor);
-		SmartDashboard.putNumber("LED.BRIGHTNESS", 255);
+		Dashboard.getInstance().putNumber(false, "LED.Brightness", 255.0);
 	}
 
 	@Override
@@ -68,9 +70,9 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 		gyro.run();
 		Cameras.run();
-		byte bright = (byte) SmartDashboard.getNumber("LED.BRIGHTNESS", -1);
+		byte bright = (byte) Dashboard.getNumber("LED.BRIGHTNESS", -1);
 		if (bright == -1) {
-			SmartDashboard.putNumber("LED.BRIGHTNESS", 255);
+			Dashboard.putNumber("LED.BRIGHTNESS", 255);
 			bright = (byte) 255;
 		}
 		if (brightness != bright) {
